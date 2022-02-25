@@ -1,11 +1,41 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:login_page/singup.dart';
+import 'package:login_page/home.dart';
 
 class LoginPage extends StatelessWidget {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    Future<void> _showMyDialog() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Warning'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('User not found!'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -62,8 +92,12 @@ class LoginPage extends StatelessWidget {
                     ),
                     child: Column(
                       children: <Widget>[
-                        inputFile(label: 'Email'),
-                        inputFile(label: 'Password', obscureText: true),
+                        inputFile(
+                            label: 'Email', textController: emailController),
+                        inputFile(
+                            label: 'Password',
+                            textController: passwordController,
+                            obscureText: true),
                       ],
                     ),
                   ),
@@ -86,7 +120,17 @@ class LoginPage extends StatelessWidget {
                       child: MaterialButton(
                         minWidth: double.infinity,
                         height: 60,
-                        onPressed: () {},
+                        onPressed: () {
+                          if (emailController.text == "elcin@gmail" &&
+                              passwordController.text == "123") {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          } else {
+                            _showMyDialog();
+                          }
+                        },
                         color: Color(0xff0095FF),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
@@ -118,7 +162,6 @@ class LoginPage extends StatelessWidget {
                             fontSize: 18,
                             color: Colors.black,
                           ),
-                          // ),
                         ),
                       ),
                     ],
@@ -143,7 +186,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-Widget inputFile({label, obscureText = false}) {
+Widget inputFile({label, textController, obscureText = false}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -157,6 +200,7 @@ Widget inputFile({label, obscureText = false}) {
       ),
       SizedBox(height: 5),
       TextField(
+        controller: textController,
         obscureText: obscureText,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),

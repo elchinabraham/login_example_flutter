@@ -35,7 +35,7 @@ class SingUpPage extends StatelessWidget {
               Column(
                 children: <Widget>[
                   Text(
-                    'Sing up',
+                    'Sign up',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class SingUpPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Text(
-                    'Sing up',
+                    'Sign up',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,

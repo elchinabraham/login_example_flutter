@@ -7,11 +7,11 @@ import 'package:login_page/singup.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HomePage(),
+    home: MainPage(),
   ));
 }
 
-class HomePage extends StatelessWidget {
+class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Text(
-                      'Sing up',
+                      'Sign up',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
